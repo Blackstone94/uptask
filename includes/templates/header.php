@@ -1,4 +1,3 @@
-<?php include_once 'includes/funciones/funciones.php'?>
 <!DOCTYPE html>
 <html lang="en">
 <head>

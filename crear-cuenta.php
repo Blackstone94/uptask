@@ -1,4 +1,5 @@
-<?php  include 'includes/templates/header.php' ?>
+<?php  include 'includes/funciones/funciones.php';
+       include 'includes/templates/header.php' ?>
 
     <div class="contenedor-formulario">
         <h1>UpTask <span>Crear Cuenta</span></h1>
@@ -20,6 +21,4 @@
             </div>
         </form>
     </div>
-    <script src="js/sweetalert2.all.min.js"></script>
-</body>
-</html>
+<?php  include 'includes/templates/footer.php'; ?>

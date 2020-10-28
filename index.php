@@ -1,5 +1,7 @@
-<?php  include 'includes/templates/header.php';
-include 'includes/funciones/conexion.php'  ?>
+<?php  
+    include 'includes/funciones/funciones.php';
+    include 'includes/templates/header.php';
+    include 'includes/funciones/conexion.php'  ?>
 <div class="barra">
     <h1>UpTask - Administración de Proyectos</h1>
     <a href="#">Cerrar Sesión</a>
@@ -62,10 +64,4 @@ include 'includes/funciones/conexion.php'  ?>
         </div>
     </main>
 </div><!--.contenedor-->
-
-
-<script src="js/sweetalert2.all.min.js"></script>
-
-
-</body>
-</html>
+<?php  include 'includes/templates/footer.php'; ?>

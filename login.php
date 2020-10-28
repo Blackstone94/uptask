@@ -1,4 +1,5 @@
-<?php  include 'includes/templates/header.php' ?>
+<?php  include 'includes/funciones/funciones.php';
+       include 'includes/templates/header.php' ?>
     <div class="contenedor-formulario">
         <h1>UpTask</h1>
         <form id="formulario" class="caja-login" method="post">
@@ -21,8 +22,4 @@
         </form>
     </div>
 
-    <script src="js/sweetalert2.all.min.js"></script>
-
-
-</body>
-</html>
+<?php  include 'includes/templates/footer.php'; ?>
