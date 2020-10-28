@@ -1,5 +1,5 @@
-<?php  include 'includes/templates/header.php' ?>
-
+<?php  include 'includes/templates/header.php';
+include 'includes/funciones/conexion.php'  ?>
 <div class="barra">
     <h1>UpTask - Administración de Proyectos</h1>
     <a href="#">Cerrar Sesión</a>
