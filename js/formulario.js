@@ -32,7 +32,20 @@ function validarRegistro(e){
         //retorno de datos
         xhr.onload = function(){
             if(this.status===200){
-                console.log(xhr.responseText);
+                var respuesta=JSON.parse(xhr.responseText);
+                if(respuesta.respuesta==='correcto'){   
+                    swal({
+                        type:'success',
+                        title: 'Correcto',
+                        text: 'Registro guardado'
+                    });
+                }else{
+                    swal({
+                        type: 'error',
+                        title: 'Error',
+                        text: 'Ocurrio un error'
+                    });
+                }
             }
         }
         xhr.send(datos);

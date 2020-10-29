@@ -11,10 +11,25 @@
         );
         $hash_password=password_hash($password,PASSWORD_BCRYPT,$opciones);
 
-        $respuesta=array(
-            'pass' => $hash_password
-        );
-        
+        //incluir conexion bd
+        include '../funciones/conexion.php';
+        $stmt=$conn->prepare("INSERT INTO usuarios (usuario, password) values (?,?)");
+        $stmt->bind_param("ss",$usuario,$hash_password);
+        $stmt->execute();
+        if($stmt->affected_rows==1){
+            $respuesta=array(
+                'respuesta'=>'correcto',
+                'id_insertado'=>$stmt->insert_id,
+                'tipo'=>'crear'
+            );
+        }else{
+            $respuesta=array(
+                'respuesta'=>'error'
+            );
+        }
+
+        $stmt->close();
+        $conn->close();
         echo json_encode($respuesta);
     }
     else if($accion=='login'){
