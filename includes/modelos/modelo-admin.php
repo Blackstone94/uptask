@@ -54,6 +54,10 @@
                         'respuesta'=>'correcto',
                         'tipo'=>$accion
                     );
+                    session_start();
+                    $_SESSION['nombre']=$usuario;
+                    $_SESSION['id']=$idUsuario;
+                    $_SESSION['login']=true;
                 }else{
                     $respuesta=array(
                         'error'=>'Password incorrecto'
