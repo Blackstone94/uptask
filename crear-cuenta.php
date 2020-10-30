@@ -1,6 +1,6 @@
 <?php  include 'includes/funciones/funciones.php';
        include 'includes/templates/header.php' ?>
-
+  
     <div class="contenedor-formulario">
         <h1>UpTask <span>Crear Cuenta</span></h1>
         <form id="formulario" class=" caja-login" method="post">
