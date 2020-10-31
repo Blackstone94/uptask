@@ -33,7 +33,6 @@ function validarRegistro(e){
         xhr.onload = function(){
             console.log(this.status);
             if(this.status===200){
-                console.log("status 200");
                 var respuesta=JSON.parse(xhr.responseText);
                 if(respuesta.respuesta==='correcto'){
                     if(respuesta.tipo==='crear'){
