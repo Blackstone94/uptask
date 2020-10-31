@@ -22,5 +22,11 @@ function nuevoProyecto(e){
     });
 }
 function guardarProyectoDb(nombreProyecto){
-    console.log(nombreProyecto);
+    var nuevoProyecto=document.createElement('li');
+    nuevoProyecto.innerHTML=`
+    <a href="#">
+        ${nombreProyecto}
+    </a>
+    `;
+    listaProyectos.appendChild(nuevoProyecto);
 }
