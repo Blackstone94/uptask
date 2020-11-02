@@ -22,11 +22,28 @@ function nuevoProyecto(e){
     });
 }
 function guardarProyectoDb(nombreProyecto){
-    var nuevoProyecto=document.createElement('li');
+    ///ajax
+    var xhr=new XMLHttpRequest();
+    var datos =new FormData();
+    datos.append('proyecto',nombreProyecto);
+    datos.append('accion','crear'); 
+    //abrir conexion
+    xhr.open('POST','includes/modelos/modelo-proyecto.php');
+
+    xhr.onload = function(){
+        if(this.status === 200){
+            console.log(xhr.responseText);
+            var respuesta=JSON.parse(xhr.responseText);
+        
+        }
+    };
+    xhr.send(datos);
+
+  /*  var nuevoProyecto=document.createElement('li');
     nuevoProyecto.innerHTML=`
     <a href="#">
         ${nombreProyecto}
     </a>
     `;
-    listaProyectos.appendChild(nuevoProyecto);
+    listaProyectos.appendChild(nuevoProyecto);*/
 }
