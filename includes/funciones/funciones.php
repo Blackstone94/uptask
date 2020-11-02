@@ -14,3 +14,12 @@
             return false;
         }
     }
+    function obtenerNombreProyecto($id = null){
+        include 'conexion.php';
+        try{
+           return $conn->query("SELECT nombre FROM proyectos where id = {$id}");
+        }catch(Exception $e){
+            echo 'Error: '. $e->getMessage();
+            return false;
+        }
+    }
