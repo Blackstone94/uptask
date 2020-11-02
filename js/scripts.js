@@ -28,12 +28,38 @@ function guardarProyectoDb(nombreProyecto){
     datos.append('proyecto',nombreProyecto);
     datos.append('accion','crear'); 
     //abrir conexion
-    xhr.open('POST','includes/modelos/modelo-proyecto.php');
+    xhr.open('POST','includes/modelos/modelo-proyecto.php',true);
 
     xhr.onload = function(){
         if(this.status === 200){
-            console.log(xhr.responseText);
             var respuesta=JSON.parse(xhr.responseText);
+            if(respuesta.respuesta==='correcto'){
+                if(respuesta.tipo==='crear'){
+                    var nuevoProyecto=document.createElement('li');
+                    nuevoProyecto.innerHTML=`
+                    <a href="index.php?id_proyecto=${respuesta.id_insertado}" id=${respuesta.id_insertado}">
+                        ${respuesta.nombre}
+                    </a>
+                    `;
+                    listaProyectos.appendChild(nuevoProyecto);
+                    swal({
+                        type:'success',
+                        title: 'Proyecto creado',
+                        text: 'El proyecto: '+respuesta.nombre+ 'se creo correctamente'
+                    }).then(resultado=>{
+                        if(resultado.value){
+                            window.location.href='index.php?id_proyecto='+respuesta.id_insertado;
+                        }
+                    });
+                }
+            }else{
+                swal({
+                    type: 'error',
+                    title: 'Error',
+                    text: respuesta.error
+                });
+            }
+            console.log(xhr.responseText);
         
         }
     };
