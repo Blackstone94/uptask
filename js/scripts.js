@@ -4,6 +4,9 @@ var listaProyectos=document.querySelector('ul#proyectos');
 function eventsListeners(){
     //boton para crear proyectos
     document.querySelector('.crear-proyecto a').addEventListener('click',nuevoProyecto);
+
+    document.querySelector('.nueva-tarea').addEventListener('click',agregarTarea);
+    
 }
 function nuevoProyecto(e){
     e.preventDefault();
@@ -40,7 +43,7 @@ function guardarProyectoDb(nombreProyecto){
                     <a href="index.php?id_proyecto=${respuesta.id_insertado}" id=${respuesta.id_insertado}">
                         ${respuesta.nombre}
                     </a>
-                    `;
+                      `;
                     listaProyectos.appendChild(nuevoProyecto);
                     swal({
                         type:'success',
@@ -72,4 +75,14 @@ function guardarProyectoDb(nombreProyecto){
     </a>
     `;
     listaProyectos.appendChild(nuevoProyecto);*/
+}
+function agregarTarea(e){
+    e.preventDefault();
+    var nombreTarea=document.querySelector('.nombre-tarea').value;
+    if(nombreTarea==''){
+        swal({
+            type:'error',
+            title: 'Nombre en blacno',
+            text: 'Debes de escribir el nombre de la tarea'})
+    }
 }
