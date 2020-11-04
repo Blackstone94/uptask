@@ -67,22 +67,36 @@ function guardarProyectoDb(nombreProyecto){
         }
     };
     xhr.send(datos);
-
-  /*  var nuevoProyecto=document.createElement('li');
-    nuevoProyecto.innerHTML=`
-    <a href="#">
-        ${nombreProyecto}
-    </a>
-    `;
-    listaProyectos.appendChild(nuevoProyecto);*/
 }
+
 function agregarTarea(e){
     e.preventDefault();
     var nombreTarea=document.querySelector('.nombre-tarea').value;
     if(nombreTarea==''){
         swal({
             type:'error',
-            title: 'Nombre en blacno',
+            title: 'Nombre en blanco',
             text: 'Debes de escribir el nombre de la tarea'})
+    }else{
+        var datos=new FormData();
+        datos.append('accion','crear');
+        datos.append('tarea',nombreTarea);
+        datos.append('idProyecto',document.querySelector('#id_proyecto').value);
+
+        //crear ajax
+        var xhr=new XMLHttpRequest();
+        //abir conexion
+        xhr.open('POST','includes/modelos/modelo-tareas.php',true);
+        //respuesta
+        xhr.onload=function(){
+            if(this.status===200){
+                //todo correcto
+                var respuesta=JSON.parse(xhr.responseText);
+                console.log(respuesta);
+
+            }
+        }
+        //ejecutar
+        xhr.send(datos);
     }
 }
