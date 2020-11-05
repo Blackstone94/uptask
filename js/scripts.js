@@ -4,9 +4,10 @@ var listaProyectos=document.querySelector('ul#proyectos');
 function eventsListeners(){
     //boton para crear proyectos
     document.querySelector('.crear-proyecto a').addEventListener('click',nuevoProyecto);
-
+    //boton para crear una nueva tarea
     document.querySelector('.nueva-tarea').addEventListener('click',agregarTarea);
-    
+    //acciones de las tareas
+    document.querySelector('.listado-pendientes').addEventListener('click',accionesTareas);
 }
 function nuevoProyecto(e){
     e.preventDefault();
@@ -132,4 +133,23 @@ function agregarTarea(e){
         //ejecutar
         xhr.send(datos);
     }
+}
+function accionesTareas(e){
+    e.preventDefault();
+    if(e.target.classList.contains('fa-check-circle')){
+        if(e.target.classList.contains('completo')){
+            e.target.classList.remove('completo')
+            cambiarEstadoTareas(e.target);
+        }else{
+            e.target.classList.add('completo');
+            cambiarEstadoTareas(e.target);
+        }
+        console.log('tareas');
+    }else if(e.target.classList.contains('fa-trash')){
+        console.log('basura');
+    }
+}
+function cambiarEstadoTareas(tarea){
+    console.log(tarea.parentElement.parentElement.id.split(':'));
+   // tarea.parentElement.parentElement.id.split(':')
 }
