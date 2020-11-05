@@ -92,7 +92,40 @@ function agregarTarea(e){
             if(this.status===200){
                 //todo correcto
                 var respuesta=JSON.parse(xhr.responseText);
-                console.log(respuesta);
+
+                var resultado=respuesta.respuesta,
+                tarea=respuesta.tarea,
+                id_insertado=respuesta.id_insertado,
+                tipo=respuesta.tipo;
+               
+                if(resultado==='correcto'){
+                    if(tipo==='crear'){
+                        swal({
+                            type:'success',
+                            title: 'Tarea creada',
+                            text: 'La tarea: '+tarea+' se creo correctamente'
+                        });
+                        var nuevaTarea=document.createElement('li');
+                        nuevaTarea.id='tarea'+id_insertado;
+                        nuevaTarea.classList.add('tarea');
+                        nuevaTarea.innerHTML=`
+                            <p>${tarea}</p>
+                            <div class="acciones">
+                            <i class="far fa-check-circle"></i>
+                            <i class="fas fa-trash"></i>
+                        `;
+                        var listaTareas=document.querySelector('.listado-pendientes ul');
+                        listaTareas.appendChild(nuevaTarea);
+                        document.querySelector('.agregar-tarea').reset();
+
+                    }
+                }else{
+                    swal({
+                        type:'error',
+                        title: 'Error',
+                        text: respuesta.error
+                    });
+                }
 
             }
         }

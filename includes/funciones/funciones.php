@@ -23,3 +23,12 @@
             return false;
         }
     }
+    function obtenerTareas($id = null){
+        include 'conexion.php';
+        try{
+           return $conn->query("SELECT id,nombre,estado FROM tareas where id_proyecto = {$id} order by(id)");
+        }catch(Exception $e){
+            echo 'Error: '. $e->getMessage();
+            return false;
+        }
+    }
