@@ -150,6 +150,19 @@ function accionesTareas(e){
     }
 }
 function cambiarEstadoTareas(tarea){
-    console.log(tarea.parentElement.parentElement.id.split(':'));
+   // console.log();
+    var idTarea=tarea.parentElement.parentElement.id.split(':');
+    var datos=new FormData();
+    datos.append('idTarea',idTarea[1]);
+    datos.append('tipo','modificar');
+    //ajax
+    var xhr=new XMLHttpRequest();
+    //abrir conexio
+    xhr.open('POST','../modelos/modelo-tareas.php',true);
+    //respuesta
+    xhr.onload=function(){
+
+    }
+    xhr.send(datos);
    // tarea.parentElement.parentElement.id.split(':')
 }
