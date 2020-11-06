@@ -139,30 +139,99 @@ function accionesTareas(e){
     if(e.target.classList.contains('fa-check-circle')){
         if(e.target.classList.contains('completo')){
             e.target.classList.remove('completo')
-            cambiarEstadoTareas(e.target);
+            cambiarEstadoTareas(e.target,0);
         }else{
             e.target.classList.add('completo');
-            cambiarEstadoTareas(e.target);
+            cambiarEstadoTareas(e.target,1);
         }
         console.log('tareas');
     }else if(e.target.classList.contains('fa-trash')){
-        console.log('basura');
+        swal({
+            title: "Estas seguro(a)?",
+            text: "Esta accion no se puede deshacer",
+            type: 'warning',
+            showCancelButton:true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor:'#d33',
+            confirmButtonText:'Si, borrar!',
+            cancelButtonText:'Cancelar'
+          })
+          .then((willDelete) => {
+            if (willDelete) {
+                //Eliminar de HTML
+                var tareaEliminar=e.target.parentElement.parentElement;
+                tareaEliminar.remove();
+                //Eliminar de base de datos
+                eliminarTarea(e.target);
+
+                swal({
+                    type:'success',
+                    title: 'Tarea eliminada',
+                    text: 'La tarea:  se elimino correctamente'
+                });
+            } else {
+              swal("Your imaginary file is safe!");
+            }
+          });
     }
 }
-function cambiarEstadoTareas(tarea){
+function cambiarEstadoTareas(tarea,estado){
    // console.log();
     var idTarea=tarea.parentElement.parentElement.id.split(':');
     var datos=new FormData();
     datos.append('idTarea',idTarea[1]);
-    datos.append('tipo','modificar');
+    datos.append('accion','modificar');
+    datos.append('estado',estado);
     //ajax
     var xhr=new XMLHttpRequest();
     //abrir conexio
-    xhr.open('POST','../modelos/modelo-tareas.php',true);
+    xhr.open('POST','includes/modelos/modelo-tareas.php',true);
     //respuesta
     xhr.onload=function(){
+        if(this.status===200){//ejecutado correctamente
+            console.log(xhr.responseText);
+            var respuesta=JSON.parse(xhr.responseText);
+            if(respuesta.respuesta==='correcto'){
 
+            }else{
+                swal({
+                    type:'error',
+                    title: 'Error',
+                    text: respuesta.error
+                });
+            }
+        }
     }
     xhr.send(datos);
    // tarea.parentElement.parentElement.id.split(':')
 }
+
+function eliminarTarea(tarea){
+    // console.log();
+     var idTarea=tarea.parentElement.parentElement.id.split(':');
+     var datos=new FormData();
+     datos.append('idTarea',idTarea[1]);
+     datos.append('accion','eliminar');
+     //ajax
+     var xhr=new XMLHttpRequest();
+     //abrir conexio
+     xhr.open('POST','includes/modelos/modelo-tareas.php',true);
+     //respuesta
+     xhr.onload=function(){
+         if(this.status===200){//ejecutado correctamente
+             console.log(xhr.responseText);
+             var respuesta=JSON.parse(xhr.responseText);
+             if(respuesta.respuesta==='correcto'){
+                
+             }else{
+                 swal({
+                     type:'error',
+                     title: 'Error',
+                     text: respuesta.error
+                 });
+             }
+         }
+     }
+     xhr.send(datos);
+    // tarea.parentElement.parentElement.id.split(':')
+ }

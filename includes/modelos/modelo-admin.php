@@ -69,8 +69,6 @@
                     'error'=> 'No existe el usuario'
                 );
             }
-
-
             $stmt->close();
             $conn->close();
         }catch(Exception $e){

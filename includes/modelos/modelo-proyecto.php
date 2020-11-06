@@ -17,7 +17,7 @@
                 );
             }else{
                 $respuesta=array(
-                    'error'=>'Error al registrar',
+                    'error'=>'Error al registrar'
                 );
             } 
             $stmt->close();   
