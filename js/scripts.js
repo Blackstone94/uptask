@@ -2,6 +2,9 @@ eventsListeners();
 //lista de proyectos
 var listaProyectos=document.querySelector('ul#proyectos');
 function eventsListeners(){
+    document.addEventListener('DOMContentLoaded',function(){
+        actualizarProgresoProyecto();
+    });
     //boton para crear proyectos
     document.querySelector('.crear-proyecto a').addEventListener('click',nuevoProyecto);
     //boton para crear una nueva tarea
@@ -106,6 +109,13 @@ function agregarTarea(e){
                             title: 'Tarea creada',
                             text: 'La tarea: '+tarea+' se creo correctamente'
                         });
+                        //quitar letrero de no hay tareas
+                    
+                        var listaVacia=document.querySelectorAll('.lista-vacia');
+                        if(listaVacia.length > 0){
+                            document.querySelector('.lista-vacia').remove();
+                        }
+
                         var nuevaTarea=document.createElement('li');
                         nuevaTarea.id='tarea'+id_insertado;
                         nuevaTarea.classList.add('tarea');
@@ -222,7 +232,12 @@ function eliminarTarea(tarea){
              console.log(xhr.responseText);
              var respuesta=JSON.parse(xhr.responseText);
              if(respuesta.respuesta==='correcto'){
-                
+                var tareas=document.querySelectorAll('li.tarea');
+                if(tareas.length===0){
+                    document.querySelector('.listado-pendientes').innerHTML=`
+                    <p class="lista-vacia"> No hay tareas en este proyecto </p>
+                    `;
+                }
              }else{
                  swal({
                      type:'error',
@@ -234,4 +249,7 @@ function eliminarTarea(tarea){
      }
      xhr.send(datos);
     // tarea.parentElement.parentElement.id.split(':')
+ }
+ function actualizarProgresoProyecto(){
+     
  }

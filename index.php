@@ -54,11 +54,16 @@
                             </li>  
                         <?php endforeach;
                     }else{
-                        echo 'No hay tereas en este proyecto';
+                        echo '<p class="lista-vacia"> No hay tareas en este proyecto </p>';
                     }
                 ?>
-                
             </ul>
+        </div>
+        <div class="avance">
+             <h2>Avance del proyecto</h2>
+             <div id="barra-avance" class="barra-avance">
+                   <div class="porcentaje" id="porcentaje"></div> 
+             </div>
         </div>
     </main>
 </div><!--.contenedor-->
