@@ -128,7 +128,7 @@ function agregarTarea(e){
                         var listaTareas=document.querySelector('.listado-pendientes ul');
                         listaTareas.appendChild(nuevaTarea);
                         document.querySelector('.agregar-tarea').reset();
-
+                        actualizarProgresoProyecto();
                     }
                 }else{
                     swal({
@@ -143,6 +143,7 @@ function agregarTarea(e){
         //ejecutar
         xhr.send(datos);
     }
+
 }
 function accionesTareas(e){
     e.preventDefault();
@@ -184,6 +185,7 @@ function accionesTareas(e){
             }
           });
     }
+    actualizarProgresoProyecto();
 }
 function cambiarEstadoTareas(tarea,estado){
    // console.log();
@@ -248,8 +250,23 @@ function eliminarTarea(tarea){
          }
      }
      xhr.send(datos);
+     actualizarProgresoProyecto();
     // tarea.parentElement.parentElement.id.split(':')
  }
  function actualizarProgresoProyecto(){
-     
+    //optener todas las tareas 
+    const tareas=document.querySelectorAll('li.tarea');
+    //obtener las tareas copletas
+    const tareasCompletadas=document.querySelectorAll('i.completo');
+    //determinar el abacne
+    const avance=Math.round(( tareasCompletadas.length / tareas.length)*100);
+    const porcentaje = document.querySelector('#porcentaje');
+    porcentaje.style.width=avance+"%";
+    if(avance===100){
+        swal({
+            type:'success',
+            title: 'Finalizado',
+            text: 'Haz terminado este proyecto'
+        });
+    }
  }
